@@ -1,9 +1,5 @@
 from pyniryo import *
-
-observation_pose = PoseObject(
-    x=0.18, y=0.0, z=0.35,
-    roll=0.0, pitch=1.57, yaw=-0.2,
-)
+from utilities import RIGHT_VISION_AREA
 
 # Connecting to robot
 robot = NiryoRobot("10.10.10.10")
@@ -11,7 +7,7 @@ robot.calibrate_auto()# Getting calibration param
 mtx, dist = robot.get_camera_intrinsics()
 
 # Moving to observation pose
-robot.move_pose(observation_pose)
+robot.move_pose(RIGHT_VISION_AREA)
 
 while "User do not press Escape neither Q":
     # Getting image
