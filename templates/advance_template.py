@@ -10,9 +10,6 @@ robot_ip_address_local = "127.0.0.1"
 robot_ip_address = robot_ip_address_local if local_mode else robot_ip_address_rpi
 
 def process(niryo_edu):
-	# --- --------- --- #
-	# --- YOUR CODE --- #
-	# --- --------- --- #
 	pass
 
 if __name__ == '__main__':
