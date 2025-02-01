@@ -17,9 +17,10 @@ print()
 print(pose_read_2)
 
 
-# Using PoseObject 
-# It is a python object that stores roll, pitch and yaw
-# That it can be also converted into list via to_list()
+# Using PoseObject
+# It is a python object that stores x, y, z, roll, pitch and yaw parameters
+# The units used are RADIANS
+
 
 pose_object_test = PoseObject(
     0.1402,
@@ -30,14 +31,17 @@ pose_object_test = PoseObject(
     -0.001
 )
 
-# print(pose_object_test)
-# if we only want the values of the axis,
-# we may use the function bellow
-
-# print(pose_object_test.to_list())
-
-# output: [0.1402, -0.0001, 0.2033, 0.003, 0.751, -0.001]
-# If we compare this to __str__ , setters and fuction methods
-# output: x = 0.1402, y = -0.0001, z = 0.2033
+# Print the pose object to see its values:
+# Output: x = 0.1402, y = -0.0001, z = 0.2033
 #         roll = 0.003, pitch = 0.751, yaw = -0.001
-# it is clearly much easier to operate with this data structre
+
+# You can also convert these values into a list using the to_list() method.
+# This makes it easier to display and work with the data.
+
+# Example:
+# print(pose_object_test.to_list())
+# Output: [0.1402, -0.0001, 0.2033, 0.003, 0.751, -0.001]
+
+# Comparing to_list() with other methods, using to_list() is more convenient
+# because you can directly use the list in instructions, like moving a robot,
+# without manually entering the data each time.
