@@ -37,6 +37,10 @@ img_threshold_any = morphological_transformations(
     kernel_shape=(9,9), 
     kernel_type=KernelType.RECT
 )
+
+# This program will find the barycenter 
+# of the biggest figure found
+
 cnt = biggest_contour_finder(img_threshold_any)
 cnt_barycenter = get_contour_barycenter(cnt)
 cx, cy = cnt_barycenter

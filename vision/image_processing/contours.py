@@ -38,6 +38,7 @@ img_threshold_any = morphological_transformations(
     kernel_shape=(9,9), 
     kernel_type=KernelType.RECT
 )
+
 cnts = biggest_contours_finder(img_threshold_any, 3)
 img_contours = draw_contours(img_threshold_any, cnts)
 show_img("init", img_threshold_any)
