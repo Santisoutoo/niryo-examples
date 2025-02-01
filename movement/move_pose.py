@@ -33,3 +33,6 @@ robot.pose = pose_target
 
 print("MOVING WITH POSE SETTER AND POSE OBJET")
 robot.pose = pose_target_obj
+
+# As shown in the get_pose.py file, you can use a Pose object and its to_list() method
+# to convert the pose into a list. This list can then be used directly in move_joints().
