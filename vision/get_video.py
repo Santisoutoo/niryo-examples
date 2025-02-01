@@ -1,8 +1,8 @@
 from pyniryo import *
-from utilities import RIGHT_VISION_AREA
+from utilities import RIGHT_VISION_AREA, IP_ADDRESS
 
 # Connecting to robot
-robot = NiryoRobot("10.10.10.10")
+robot = NiryoRobot(IP_ADDRESS)
 robot.calibrate_auto()# Getting calibration param
 mtx, dist = robot.get_camera_intrinsics()
 
