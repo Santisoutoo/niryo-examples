@@ -24,7 +24,5 @@ print("MOVING JOINTS WITH FUNCTION AND LIST")
 # Moving Joints using the function with a predefined list of floats
 robot.move_joints(POSITION_2)
 
-# As shown in the get_pose.py file, you can use a Pose object and its to_list() method
-# to convert the pose into a list. This list can then be used directly in move_joints().
 
 robot.close_connection()
