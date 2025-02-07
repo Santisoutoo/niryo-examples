@@ -1,30 +1,29 @@
 from pyniryo import *
 import cv2 as cv
-import numpy as np
 from utilities import RIGHT_VISION_AREA
 
-# Definir dirección IP del robot
+# CONNECTION
 IP_ADDRESS = "172.16.126.2"
 robot = NiryoRobot(IP_ADDRESS)
 robot.calibrate_auto()
 
-# Posicionar el brazo en la zona de visión
+# Move to vision area
 robot.move_pose(RIGHT_VISION_AREA)
 
-# Capturar imagen
+# Get image
 img_compressed = robot.get_img_compressed()
 img = uncompress_image(img_compressed)
 
-# Definir valores iniciales para el filtrado HSV
+# initialize variables
 low_H, low_S, low_V = 0, 40, 80
 high_H, high_S, high_V = 180, 255, 255
 
-# Crear ventana
+# Create window for color thresholding
 cv.namedWindow("Object Detection")
 
 class TrackBarUpdate():
     """
-    This class handles the creation and updating of trackbars for HSV color filtering.
+    This class handles the updating of trackbars for HSV color filtering.
     It stores the current values of the trackbars for the low and high ranges of the H, S, and V channels.
     """
 
@@ -60,19 +59,19 @@ class TrackBarUpdate():
         self.high_v = val
         cv.setTrackbarPos("High V", "Object Detection", self.high_v)
 
-# Crear instancia de TrackBar
 trackbar = TrackBarUpdate(low_H, high_H, low_S, high_S, low_V, high_V)
 
-# Crear trackbars
-cv.createTrackbar("Low H", "Object Detection", low_H, 180, TrackBarUpdate.update_low_H)
-cv.createTrackbar("High H", "Object Detection", high_H, 180, TrackBarUpdate.update_high_H)
-cv.createTrackbar("Low S", "Object Detection", low_S, 255, TrackBarUpdate.update_low_S)
-cv.createTrackbar("High S", "Object Detection", high_S, 255, TrackBarUpdate.update_high_S)
-cv.createTrackbar("Low V", "Object Detection", low_V, 255, TrackBarUpdate.update_low_V)
-cv.createTrackbar("High V", "Object Detection", high_V, 255, TrackBarUpdate.update_high_V)
+# Trackbars Creation 
+cv.createTrackbar("Low H", "Object Detection", low_H, 180, trackbar.update_low_H)
+cv.createTrackbar("High H", "Object Detection", high_H, 180, trackbar.update_high_H)
+cv.createTrackbar("Low S", "Object Detection", low_S, 255, trackbar.update_low_S)
+cv.createTrackbar("High S", "Object Detection", high_S, 255, trackbar.update_high_S)
+cv.createTrackbar("Low V", "Object Detection", low_V, 255, trackbar.update_low_V)
+cv.createTrackbar("High V", "Object Detection", high_V, 255, trackbar.update_high_V)
 
 while True:
-    # Convertir a HSV
+
+    # Change from BGR (default model in openCV) to HSV
     frame_HSV = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 
     frame_threshold = cv.inRange(
@@ -81,7 +80,6 @@ while True:
         (trackbar.high_h, trackbar.high_s, trackbar.high_v)
     )
     
-    # Mostrar imagen original y la imagen filtrada
     cv.imshow("Original Image", img)
     cv.imshow("Object Detection", frame_threshold)
     
